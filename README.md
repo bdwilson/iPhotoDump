@@ -27,7 +27,7 @@ you're into that sort of thing, this may be helpful to dump your data to files:
 
 Configuration 
 -------------
-Make sure you change the location of your iPhoto/Aperture database to reflect where it really is.  This will probably be "/Users/<you>/Pictures/iPhoto Library/Database/"
+Make sure you change the location of your iPhoto/Aperture database to reflect where it really is.  This will probably be "/Users/[you]/Pictures/iPhoto Library/Database/"
 
 
 Bugs/Contact Info
