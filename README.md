@@ -22,10 +22,8 @@ Limitations
 I don't use Albums or Smart Albums for keeping track of things, so I didn't
 include that here.  I'm sure you could fuzz some more and get that info. If
 you're into that sort of thing, this may be helpful to dump your data to files:
-<pre>  $ for i in `sqlite3 Library.apdb '.schema' | grep TABLE | awk '{print
-$3}'`; do sqlite3 Library.apdb "select * from $i" > /tmp/$i.out ; done
- $ for i in `sqlite3 Properties.apdb '.schema' | grep TABLE | awk '{print
-$3}'`; do sqlite3 Properties.apdb "select * from $i" > /tmp/$i.out ; done
+<pre> $ for i in `sqlite3 Library.apdb '.schema' | grep TABLE | awk '{print $3}'`; do sqlite3 Library.apdb "select * from $i" > /tmp/$i.out ; done
+ $ for i in `sqlite3 Properties.apdb '.schema' | grep TABLE | awk '{print $3}'`; do sqlite3 Properties.apdb "select * from $i" > /tmp/$i.out ; done</pre>
 
 Configuration 
 -------------
