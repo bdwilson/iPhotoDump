@@ -50,16 +50,19 @@ $dbl->do($database);
 #where U.modelId=(select stringId from P.RKIptcProperty as I where
 #I.versionId=V.modelId and I.propertyKey='Caption/Abstract')), V.mainRating from
 #L.RKVersion as V where 1"; 
-$query = "select distinct(M.imagePath), M.imageDate, M.fileSize, V.fileName, V.name, (select name from L.RKFolder
+$query = "select M.imagePath, V.imageDate, M.fileSize, V.fileName, V.name,
+(select name from L.RKFolder
 as F where V.projectUuid=F.uuid),(select stringProperty from P.RKUniqueString
 as U where U.modelId=(select stringId from P.RKIptcProperty as I where
 I.versionId=V.modelId and I.propertyKey='Caption/Abstract')), V.mainRating from
-L.RKVersion as V inner join L.RKMaster as M on V.masterUuid=M.uuid";
+L.RKVersion as V inner join L.RKMaster as M on V.masterUuid=M.uuid order by
+V.imageDate";
 
 my $stl = $dbl->prepare($query);
 $stl->execute();
       
 while(my ($imagePath, $imagedate, $filesize, $filename, $name, $eventname, $description, $rating) = $stl->fetchrow()) {
+	        next if ($filename =~ /\d{10}\_[a-z0-9]+\_o/);  # ignore temporary? images created from flickr syncing process
 		$imagedate = strftime "%a %b %e %H:%M:%S %Y", localtime($imagedate+$unixOffset);
 		$items{"$imagePath"}{'imagedate'}=$imagedate;
 		$items{"$imagePath"}{'filesize'}=$filesize;
@@ -68,7 +71,7 @@ while(my ($imagePath, $imagedate, $filesize, $filename, $name, $eventname, $desc
 		$items{"$imagePath"}{'event'}=$eventname;
 		if ($description) {
 			$items{"$imagePath"}{'description'}=$description;
-	    }
+	        }
 		if ($rating > 0) { 
 			$items{"$imagePath"}{'rating'}=$rating;
 		}
