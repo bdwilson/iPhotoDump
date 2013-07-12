@@ -11,6 +11,7 @@ retrieve:
  Size<br>
  Event<br>
  Description (if exists)<br>
+ Keywords (if they exist)<br>
  Rating (if exists)<br>
 
 This is helpful if you wish to leverage additional scripts to upload your
